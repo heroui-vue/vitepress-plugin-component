@@ -14,11 +14,11 @@
 ## 安装
 
 ```bash
-npm install vitepress-plugin-component-tabs --save-dev
+npm install vitepress-plugin-vue-component-view --save-dev
 # 或者
-yarn add vitepress-plugin-component-tabs --dev
+yarn add vitepress-plugin-vue-component-view --dev
 # 或者
-pnpm add vitepress-plugin-component-tabs -D
+pnpm add vitepress-plugin-vue-component-view -D
 ```
 
 ## 使用方法
@@ -29,7 +29,7 @@ pnpm add vitepress-plugin-component-tabs -D
 
 ```js
 import { defineConfig } from 'vitepress'
-import componentTabs from 'vitepress-plugin-component-tabs'
+import componentTabs from 'vitepress-plugin-vue-component-view'
 
 export default defineConfig({
   // ... 其他配置
@@ -64,7 +64,7 @@ vue component
 
 ```js
 import DefaultTheme from 'vitepress/theme'
-import 'vitepress-plugin-component-tabs/style'
+import 'vitepress-plugin-vue-component-view/style'
 
 export default {
   ...DefaultTheme,
