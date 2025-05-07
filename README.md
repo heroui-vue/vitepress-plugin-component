@@ -51,7 +51,8 @@ export default defineConfig({
 在你的 Markdown 文件中使用 `component-demo` 容器来展示组件：
 
 ```markdown
-::: component-demo src/components/MyButton.vue
+::: component-demo
+vue component
 :::
 ```
 
@@ -85,8 +86,12 @@ componentTabs({
 
 ## 示例
 
-创建一个简单的按钮组件 `src/components/MyButton.vue`：
 
+# 按钮组件
+
+这是一个示例按钮组件：
+
+::: component-demo
 ```vue
 <template>
   <button class="my-button" @click="count++">
@@ -111,19 +116,9 @@ const count = ref(0)
 }
 </style>
 ```
-
-然后在 Markdown 文件中引用它：
-
-```markdown
-# 按钮组件
-
-这是一个示例按钮组件：
-
-::: component-demo src/components/MyButton.vue
 :::
 
 你可以在上面的选项卡中查看组件的预览和源代码。
-```
 
 ## 注意事项
 
