@@ -1,8 +1,8 @@
-# VitePress Plugin Component Tabs
+# Vitepress Plugin Vue Component View
 
 [简体中文](README-zh-CN.md)
 
-A eitePress plugin to display Vue components in your documentation with an automatically generated two-tab interface: one for the component's preview and another to show its source code.
+A VitePress plugin to display Vue components in your documentation with an automatically generated two-tab interface: one for the component's preview and another to show its source code.
 
 ## Features
 

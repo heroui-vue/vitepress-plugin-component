@@ -1,4 +1,4 @@
-# VitePress Plugin Component Tabs
+# Vitepress Plugin Vue Component View
 
 一个 VitePress 插件，用于在文档中展示 Vue 组件，并自动生成包含两个选项卡的展示界面：一个用于组件的预览，另一个用于显示组件的源代码。
 
