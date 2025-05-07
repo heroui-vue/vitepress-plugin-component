@@ -1,38 +1,40 @@
 # VitePress Plugin Component Tabs
 
-一个 VitePress 插件，用于在文档中展示 Vue 组件，并自动生成包含两个选项卡的展示界面：一个用于组件的预览，另一个用于显示组件的源代码。
+[简体中文](README-zh-CN.md)
 
-## 特性
+A eitePress plugin to display Vue components in your documentation with an automatically generated two-tab interface: one for the component's preview and another to show its source code.
 
-- 🖼️ **组件预览** - 在文档中直接查看组件的渲染效果
-- 📝 **源代码查看** - 在选项卡中查看组件的完整源代码
-- 🎨 **语法高亮** - 使用 highlight.js 提供源代码的语法高亮
-- 📋 **代码复制** - 一键复制组件源代码
-- 🌓 **暗黑模式支持** - 自动适配 VitePress 的明暗主题
-- ⚡ **轻量级** - 没有复杂的依赖
+## Features
 
-## 安装
+- 🖼️ **Component Preview** - Directly view the rendered output of your component within the documentation.
+- 📝 **Source Code View** - View the complete source code of the component in a dedicated tab.
+- 🎨 **Syntax Highlighting** - Provides syntax highlighting for source code using highlight.js.
+- 📋 **Code Copying** - One-click copy for the component's source code.
+- 🌓 **Dark Mode Support** - Automatically adapts to VitePress's light and dark themes.
+- ⚡ **Lightweight** - No complex dependencies.
+
+## Installation
 
 ```bash
 npm install vitepress-plugin-vue-component-view --save-dev
-# 或者
+# Or
 yarn add vitepress-plugin-vue-component-view --dev
-# 或者
+# Or
 pnpm add vitepress-plugin-vue-component-view -D
+
 ```
 
-## 使用方法
+## Usage
 
-### 1. 配置 VitePress
+### 1. Configure VitePress
 
-在 VitePress 配置文件中添加插件（`.vitepress/config.js` 或 `.vitepress/config.ts`）：
-
+Add the plugin to your VitePress configuration file (`.vitepress/config.js` or `.vitepress/config.ts`):
 ```js
 import { defineConfig } from 'vitepress'
 import componentTabs from 'vitepress-plugin-vue-component-view'
 
 export default defineConfig({
-  // ... 其他配置
+  // ... other configurations
 
   markdown: {
     config: (md) => {
@@ -46,9 +48,9 @@ export default defineConfig({
 })
 ```
 
-### 2. 在 Markdown 中使用
+### 2. Use in Markdown
 
-在你的 Markdown 文件中使用 `component-demo` 容器来展示组件：
+Use the `component-demo` container in your Markdown files to display components:
 
 ```markdown
 ::: component-demo
@@ -56,51 +58,49 @@ vue component
 :::
 ```
 
-这将生成一个带有两个选项卡的界面：一个显示组件的预览，另一个显示组件的源代码。
+This will generate an interface with two tabs: one showing the component's preview and the other showing its source code.
 
-### 3. 添加样式（可选）
+### 3. Add Styles (Optional)
 
-在 `.vitepress/theme/index.js` 中导入插件样式：
+Import the plugin styles in your `.vitepress/theme/index.js`:
 
 ```js
 import DefaultTheme from 'vitepress/theme'
-import 'vitepress-plugin-vue-component-view/style'
+import "vitepress-plugin-vue-component-view/style"
 
 export default {
   ...DefaultTheme,
-  enhanceApp({ app }) {
-    // 你的增强代码
+  enhanceAppR{ app }) {
+    // Your enhancements
   }
 }
 ```
 
-## 配置选项
+## Configuration Options
 
-插件支持以下配置选项：
-
+The plugin supports the following configuration options:
 ```js
 componentTabs({
-  // 未来可以添加更多配置选项
+  // More configuration options can be added in the future
 })
 ```
 
-## 示例
+## Example
 
+### Button Component
 
-# 按钮组件
+This is an example button component:
 
-这是一个示例按钮组件：
-
+```markdown
 ::: component-demo
-```vue
 <template>
   <button class="my-button" @click="count++">
-    点击了 {{ count }} 次
+    Clicked {{ count }} times
   </button>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 const count = ref(0)
 </script>
@@ -115,17 +115,16 @@ const count = ref(0)
   cursor: pointer;
 }
 </style>
-```
 :::
+```
 
-你可以在上面的选项卡中查看组件的预览和源代码。
+You can view the component's preview and source code in the tabs above.
 
-## 注意事项
+## Notes
 
-- 组件路径应该相对于项目根目录
-- 当前版本主要支持简单的 Vue 组件，复杂的组件可能需要额外的配置
-- 组件必须是有效的单文件组件 (SFC)
-
-## 许可证
+- Component paths should be relative to the project root.
+- Current version supports simple Vue components; complex components might require additional configuration. - Components must be valid Single File Components (SFCs).
+## License
 
 MIT
+```
