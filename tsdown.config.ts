@@ -3,9 +3,21 @@ import vue from "unplugin-vue/rolldown";
 
 export default defineConfig({
   entry: {
-    index: "src/index.js",
+    index: "src/markdown.js",
     client: "src/client.js",
   },
-  plugins: [vue()],
+  plugins: [
+    vue({
+      style: {
+        preprocessOptions: {},
+      },
+    }),
+  ],
+  alias: {
+    "@": "src/",
+  },
   external: ["vue", "vitepress"],
+  outputOptions: {
+    cssChunkFileNames: "styles.css",
+  },
 });
