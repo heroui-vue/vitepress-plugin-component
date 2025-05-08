@@ -1,14 +1,16 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import type MarkdownIt from 'markdown-it'
 import markdownItContainer from 'markdown-it-container'
+import type Token from 'markdown-it/lib/token'
 
-export default function markdownPlugin(md) {
+export default function markdownPlugin(md: MarkdownIt): void {
   // 添加自定义容器
   md.use(markdownItContainer, 'component-demo', {
-    validate(params) {
-      return params.trim().match(/^component-demo(\s+(?:\S.*)?)?$/)
+    validate(params: string): boolean {
+      return params.trim().match(/^component-demo(\s+(?:\S.*)?)?$/) !== null
     },
-    render(tokens, idx) {
+    render(tokens: Token[], idx: number): string {
       const token = tokens[idx]
 
       if (token.nesting === 1) {
@@ -40,7 +42,7 @@ export default function markdownPlugin(md) {
         if (!isFile) {
           // 查找内联组件的结束标记
           let i = idx + 1
-          const content = []
+          const content: string[] = []
 
           while (i < tokens.length && !(tokens[i].type === 'container_component-demo_close')) {
             if (tokens[i].content) {
