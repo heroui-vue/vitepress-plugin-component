@@ -24,75 +24,48 @@ pnpm add vitepress-plugin-vue-component-view -D
 
 ```
 
-## Usage
+## Configuration
 
-### 1. Configure VitePress
+### 1. Add Markdown Plugin
 
 Add the plugin to your VitePress configuration file (`.vitepress/config.js` or `.vitepress/config.ts`):
 ```js
 import { defineConfig } from 'vitepress'
-import componentTabs from 'vitepress-plugin-vue-component-view'
+import { componentViewMarkdownPlugin } from 'vitepress-plugin-vue-component-view'
 
 export default defineConfig({
   // ... other configurations
 
   markdown: {
     config: (md) => {
-      md.use(componentTabs().extendMarkdown)
+      md.use(componentViewMarkdownPlugin)
     }
   },
-
-  vite: {
-    plugins: [componentTabs()]
-  }
 })
-```
-
-### 2. Use in Markdown
-
-Use the `component-demo` container in your Markdown files to display components:
-
-```markdown
-::: component-demo
-vue component
-:::
 ```
 
 This will generate an interface with two tabs: one showing the component's preview and the other showing its source code.
 
-### 3. Add Styles (Optional)
+### 2. Configure Client
 
-Import the plugin styles in your `.vitepress/theme/index.js`:
+Import the plugin styles in your `.vitepress/theme/index.js`
 
 ```js
-import DefaultTheme from 'vitepress/theme'
-import "vitepress-plugin-vue-component-view/style"
+import 'vitepress-plugin-vue-component-view/styles'
+import { enhanceAppWithComponentView } from 'vitepress-plugin-vue-component-view/client'
 
 export default {
-  ...DefaultTheme,
-  enhanceAppR{ app }) {
-    // Your enhancements
+  enhanceApp{ app }) {
+    enhanceAppWithComponentView(app)
   }
 }
 ```
 
-## Configuration Options
-
-The plugin supports the following configuration options:
-```js
-componentTabs({
-  // More configuration options can be added in the future
-})
-```
-
 ## Example
 
-### Button Component
+This is an example of button SFC:
 
-This is an example button component:
-
-```markdown
-::: component-demo
+```vue
 <template>
   <button class="my-button" @click="count++">
     Clicked {{ count }} times
@@ -115,6 +88,19 @@ const count = ref(0)
   cursor: pointer;
 }
 </style>
+````
+
+Then import it in the `.md` file:
+
+```markdown
+import Button from './src/Button.vue'
+```
+
+Use the specified syntax:
+
+```markdown
+::: component-view
+<Button />
 :::
 ```
 
