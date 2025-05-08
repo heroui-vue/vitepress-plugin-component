@@ -16,7 +16,8 @@
   "types": "index.d.ts",
   "scripts": {
     "dev": "tsdown -w",
-    "build": "tsdown"
+    "build": "tsdown",
+    "pub": "tsdown && npm publish --registry=https://registry.npmjs.org/"
   },
   "keywords": [
     "vitepress",
