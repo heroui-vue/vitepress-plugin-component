@@ -17,7 +17,7 @@
   "scripts": {
     "dev": "tsdown -w",
     "build": "tsdown",
-    "pub": "tsdown && bumpp && npm publish --registry=https://registry.npmjs.org/"
+    "pub": "tsdown && bumpp --no-push --no-tag && npm publish --registry=https://registry.npmjs.org/"
   },
   "keywords": [
     "vitepress",
