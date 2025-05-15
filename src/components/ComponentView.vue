@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import "highlight.js/styles/stackoverflow-light.css";
 import hljs from "highlight.js";
+import "highlight.js/styles/stackoverflow-light.css";
 
 const props = defineProps<{
     source: string;
