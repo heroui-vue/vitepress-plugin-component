@@ -19,7 +19,7 @@
     "build": "vite build",
     "dev:tsdown": "tsdown -w",
     "build:tsdown": "tsdown",
-    "pub": "tsdown && bumpp --no-push --no-tag && npm publish --registry=https://registry.npmjs.org/"
+    "pub": "npm run build && bumpp --no-push --no-tag && npm publish --registry=https://registry.npmjs.org/"
   },
   "keywords": [
     "vitepress",
