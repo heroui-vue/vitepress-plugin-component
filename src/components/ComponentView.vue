@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { computed, ref, useSlots } from "vue";
+import { computed, ref } from "vue";
 import "highlight.js/styles/stackoverflow-light.css";
-import "highlight.js/lib/common";
-import highlightVue from "@highlightjs/vue-plugin";
+import hljs from "highlight.js";
 
 const props = defineProps<{
     source: string;
@@ -16,7 +15,9 @@ const sourceCode = computed(() => {
     try {
         code = atob(props.source);
     } catch (e) {}
-    return code;
+
+    const { value } = hljs.highlight(code, { language: "html" });
+    return value;
 });
 
 async function copyCode() {
@@ -56,11 +57,7 @@ async function copyCode() {
         </main>
 
         <section v-else-if="activeTab === 'code'">
-            <component
-                :is="highlightVue.component"
-                language="js"
-                :code="sourceCode"
-            />
+            <span v-html="sourceCode" />
         </section>
     </div>
 </template>
@@ -129,5 +126,6 @@ async function copyCode() {
 .vp-component-tabs > section {
     background-color: var(--vp-c-bg-soft);
     border-radius: 8px;
+    padding: 24px;
 }
 </style>

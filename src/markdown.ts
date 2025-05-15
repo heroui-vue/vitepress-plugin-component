@@ -17,8 +17,9 @@ export const componentViewMarkdownPlugin: MarkdownIt.PluginSimple = (
     render: (tokens: Token[], idx: number) => {
       const token = tokens[idx];
       const content = tokens[idx + 1].content.trim();
+      const base64Content = Buffer.from(content).toString("base64");
       if (token.nesting === 1) {
-        return `<${COMPONENT_NAME} source="${content}">\n`;
+        return `<${COMPONENT_NAME} source="${base64Content}">\n`;
       } else {
         return `</${COMPONENT_NAME}>`;
       }

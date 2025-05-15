@@ -16,7 +16,7 @@ export default defineConfig({
   alias: {
     "@": "src/",
   },
-  external: ["vue", "vitepress"],
+  external: ["vue", "vitepress", /^@types/],
   outputOptions: {
     cssChunkFileNames: "styles.css",
   },
