@@ -7,26 +7,24 @@
   "module": "dist/index.js",
   "exports": {
     ".": "./dist/index.js",
-    "./client": "./dist/client.js",
-    "./styles": "./dist/styles.css"
+    "./client": "./src/client/index.ts"
   },
   "files": [
-    "dist"
+    "dist",
+    "src/client"
   ],
   "types": "index.d.ts",
   "scripts": {
-    "dev": "vite -w build",
-    "build": "vite build",
-    "dev:tsdown": "tsdown -w",
-    "build:tsdown": "tsdown",
-    "pub": "npm run build && bumpp --no-push --no-tag && npm publish --registry=https://registry.npmjs.org/"
+    "dev": "tsdown -w",
+    "build": "tsdown --minify",
+    "bump": "bumpp --sign",
+    "pub": "npm run build && npm publish --registry=https://registry.npmjs.org/"
   },
   "keywords": [
     "vitepress",
     "plugin",
     "vue",
     "component",
-    "demo",
     "tabs"
   ],
   "publishConfig": {
@@ -39,17 +37,12 @@
     "type": "git",
     "url": "https://github.com/nextui-vue/vitepress-plugin-vue-component-view"
   },
-  "dependencies": {
-    "highlight.js": "^11.11.1",
-    "markdown-it-container": "^3.0.0",
-    "unplugin-lightningcss": "^0.3.3",
-    "vite": "^6.3.5"
-  },
   "devDependencies": {
-    "@types/markdown-it": "^12.2.3",
+    "@types/markdown-it": "^14.1.2",
     "@types/markdown-it-container": "^2.0.10",
-    "@types/node": "^18.15.11",
+    "@types/node": "^22.17.0",
     "bumpp": "^10.1.0",
+    "markdown-it-container": "^4.0.0",
     "tsdown": "latest",
     "typescript": "^5.8.3",
     "unplugin-vue": "^6.2.0",
