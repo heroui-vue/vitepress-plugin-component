@@ -1,6 +1,6 @@
 {
   "name": "vitepress-plugin-vue-component-view",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "VitePress plugin that renders Vue components with tabs showing preview and source code",
   "type": "module",
   "main": "dist/index.js",
