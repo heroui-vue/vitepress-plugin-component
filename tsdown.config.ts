@@ -1,18 +1,14 @@
 import { defineConfig } from "tsdown/config";
 import vue from "unplugin-vue/rolldown";
-import lightningcss from "unplugin-lightningcss/rolldown";
 
 export default defineConfig({
+  format: "esm",
   entry: {
-    index: "src/markdown.js",
-    client: "src/client.js",
+    index: "src/node/markdown.ts",
   },
-  plugins: [vue(), lightningcss()],
+  plugins: [vue()],
   alias: {
     "@": "src/",
   },
-  external: ["vue", "vitepress", /^@types/],
-  outputOptions: {
-    cssChunkFileNames: "styles.css",
-  },
+  external: ["vue", "vitepress"],
 });
