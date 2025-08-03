@@ -110,7 +110,7 @@ async function copyCode() {
 .vp-component-tabs > header input[data-checked="true"] + label::after {
     background-color: var(--vp-code-tab-active-bar-color);
 }
-.vp-component-tabs > header input:checked + label,
+.vp-component-tabs > header input[data-checked="true"] + label,
 .vp-component-tabs > header label:hover {
     color: var(--vp-code-tab-active-text-color);
 }
