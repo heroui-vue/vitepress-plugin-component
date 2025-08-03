@@ -36,6 +36,31 @@ jobs:
           # Or use OAuth token instead:
           # claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           timeout_minutes: "60"
+          allowed_tools: |
+            Bash(git add:*),
+            Bash(git commit:*),
+            Bash(git commit -m:*),
+            Bash(git push:*),
+            Bash(git status:*),
+            Bash(git diff:*),
+            Bash(git log:*),
+            Bash(git:*),
+            Bash(uv:*),
+            Bash(python:*),
+            Bash(python3:*),
+            Bash(pytest:*),
+            Bash(ruff:*),
+            Bash(mypy:*),
+            Bash(pre-commit:*),
+            Bash(source:*),
+            Bash(ls:*),
+            Bash(cat:*),
+            Bash(echo:*),
+            Bash(pwd:*),
+            Bash(cd:*),
+            Bash(pip:*),
+            Bash(which:*),
+            Bash(gh:*)
           custom_instructions: |
             Use branch prefix: claude-agent-
             If the branch already exists, continue working on it, that means you already worked on this issue, and now continue working on it and making changes and fixes.
