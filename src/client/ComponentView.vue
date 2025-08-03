@@ -1,27 +1,30 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import hljs from "highlight.js";
-import "highlight.js/styles/stackoverflow-light.css";
+import { ref, watch } from "vue";
 
 const props = defineProps<{
-    source: string;
+    src: string;
+    highlightedSrc?: string;
 }>();
 
-const activeTab = ref<"preview" | "code">("preview");
+const highlightedSrc = ref("");
+const activedTab = ref<"preview" | "code">("preview");
 const copied = ref(false);
 
-const sourceCode = computed(() => {
-    let code = props.source;
-    try {
-        code = atob(props.source);
-    } catch (e) {}
-
-    const { value } = hljs.highlight(code, { language: "html" });
-    return value;
-});
+watch(
+    [() => props.src, () => props.highlightedSrc],
+    async ([src, highlight = ""]) => {
+        highlightedSrc.value = atob(highlight);
+        try {
+            src = atob(src);
+        } catch (e) {}
+    },
+    {
+        immediate: true,
+    },
+);
 
 async function copyCode() {
-    await navigator.clipboard.writeText(sourceCode.value);
+    await navigator.clipboard.writeText(props.src);
     copied.value = true;
     setTimeout(() => {
         copied.value = false;
@@ -44,20 +47,20 @@ async function copyCode() {
                     type="radio"
                     name="vp-component-tabs"
                     style="position: fixed; opacity: 0; pointer-events: none"
-                    :data-checked="activeTab === value"
+                    :data-checked="activedTab === value"
                 />
-                <label :for="`tab-${value}`" @click="activeTab = value">{{
+                <label :for="`tab-${value}`" @click="activedTab = value">{{
                     label
                 }}</label>
             </template>
         </header>
 
-        <main v-if="activeTab === 'preview'">
+        <main v-if="activedTab === 'preview'">
             <slot />
         </main>
 
-        <section v-else-if="activeTab === 'code'">
-            <span v-html="sourceCode" />
+        <section v-else-if="activedTab === 'code'">
+            <span v-html="highlightedSrc" />
         </section>
     </div>
 </template>
@@ -123,5 +126,6 @@ async function copyCode() {
     background-color: var(--vp-code-block-bg);
     border-radius: 8px;
     padding: 24px;
+    overflow: auto;
 }
 </style>

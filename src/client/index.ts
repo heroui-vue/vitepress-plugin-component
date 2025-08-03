@@ -1,5 +1,5 @@
 import type { App } from "vue";
-import ComponentView from "@/components/ComponentView.vue";
+import ComponentView from "./ComponentView.vue";
 
 export const COMPONENT_NAME = "ComponentView";
 
