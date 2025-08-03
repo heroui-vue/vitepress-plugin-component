@@ -44,7 +44,7 @@ async function copyCode() {
                     type="radio"
                     name="vp-component-tabs"
                     style="position: fixed; opacity: 0; pointer-events: none"
-                    :checked="value === 'preview'"
+                    :data-checked="activeTab === value"
                 />
                 <label :for="`tab-${value}`" @click="activeTab = value">{{
                     label
@@ -62,34 +62,28 @@ async function copyCode() {
     </div>
 </template>
 
-<style scoped>
-/* 样式部分保持不变 */
+<style>
 .vp-component-tabs {
     margin: 16px 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content 1fr;
+    row-gap: 16px;
 }
 
 .vp-component-tabs > header {
     display: flex;
     position: relative;
-    padding: 0 12px;
-    background-color: var(--vp-c-bg-soft);
     border-radius: 8px;
     overflow-x: auto;
     overflow-y: hidden;
-    box-shadow: inset 0 -1px var(--vp-code-tab-divider);
 }
 
-.vp-component-tabs > header input:checked + label,
-.vp-component-tabs > header label:hover {
-    color: var(--vp-code-tab-active-text-color);
-}
-.vp-component-tabs > header > label {
+.vp-component-tabs > header input + label {
     box-sizing: border-box;
     display: inline-block;
     position: relative;
-    border-bottom: 1px solid transparent;
-    padding: 0 12px;
-    line-height: 48px;
+    padding: 8px 12px;
     font-size: 14px;
     font-weight: 500;
     color: var(--vp-code-tab-text-color);
@@ -100,31 +94,33 @@ async function copyCode() {
         background-color 0.25s;
 }
 
-.vp-component-tabs > header input:checked + label::after {
-    background-color: var(--vp-code-tab-active-bar-color);
-}
-.vp-component-tabs > header label::after {
+.vp-component-tabs > header input + label::after {
     content: "";
-    height: 2px;
+    position: absolute;
+    height: 4px;
     border-radius: 2px;
     left: 8px;
     right: 8px;
-    position: absolute;
     bottom: -1px;
-
     transition: background-color 0.25s;
+}
+.vp-component-tabs > header input[data-checked="true"] + label::after {
+    background-color: var(--vp-code-tab-active-bar-color);
+}
+.vp-component-tabs > header input:checked + label,
+.vp-component-tabs > header label:hover {
+    color: var(--vp-code-tab-active-text-color);
 }
 
 .vp-component-tabs > main {
-    margin-top: 8px;
-    outline: 1px solid var(--vp-code-tab-divider);
-    background-color: var(--vp-nav-bg-color);
     padding: 20px;
+    background-color: var(--vp-nav-bg-color);
     border-radius: 8px;
+    outline: 1px solid var(--vp-c-divider);
 }
 
 .vp-component-tabs > section {
-    background-color: var(--vp-c-bg-soft);
+    background-color: var(--vp-code-block-bg);
     border-radius: 8px;
     padding: 24px;
 }
