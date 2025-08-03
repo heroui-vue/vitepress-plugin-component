@@ -29,6 +29,11 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Push branch if Claude made commits
+        if: always() && steps.claude.outcome == 'success'
+        run: |
+          git push -u origin HEAD || echo "Push failed (may already be pushed)"
+
       - name: Run Claude PR Action
         uses: anthropics/claude-code-action@beta
         with:
