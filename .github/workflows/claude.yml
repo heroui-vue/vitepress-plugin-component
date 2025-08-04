@@ -1,4 +1,4 @@
-name: Claude PR Assistant
+name: Claude Code
 
 on:
   issue_comment:
@@ -11,62 +11,31 @@ on:
     types: [submitted]
 
 jobs:
-  claude-code-action:
+  claude:
     if: |
       (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
       (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
       (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
-      (github.event_name == 'issues' && contains(github.event.issue.body, '@claude'))
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
     runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: read
       issues: read
       id-token: write
+      actions: read # Required for Claude to read CI results on PRs
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
-      - name: Run Claude PR Action
+      - name: Run Claude Code
+        id: claude
         uses: anthropics/claude-code-action@beta
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          # Or use OAuth token instead:
-          # claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          timeout_minutes: "60"
-          allowed_tools: |
-            Bash(git add:*),
-            Bash(git commit:*),
-            Bash(git commit -m:*),
-            Bash(git push:*),
-            Bash(git status:*),
-            Bash(git diff:*),
-            Bash(git log:*),
-            Bash(git:*),
-            Bash(uv:*),
-            Bash(python:*),
-            Bash(python3:*),
-            Bash(pytest:*),
-            Bash(ruff:*),
-            Bash(mypy:*),
-            Bash(pre-commit:*),
-            Bash(source:*),
-            Bash(ls:*),
-            Bash(cat:*),
-            Bash(echo:*),
-            Bash(pwd:*),
-            Bash(cd:*),
-            Bash(pip:*),
-            Bash(which:*),
-            Bash(gh:*)
-          custom_instructions: |
-            Use branch prefix: claude-agent-
-            If the branch already exists, continue working on it, that means you already worked on this issue, and now continue working on it and making changes and fixes.
-            Push your changes to the branch and verify that the branch is found before done
-            I need you to check if the branch is live - no need for PR, make sure the branch you made and committed all the changes to is there
-      - name: Push branch if Claude made commits
-        if: always() && steps.claude.outcome == 'success'
-        run: |
-          git push -u origin HEAD || echo "Push failed (may already be pushed)"
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+          # This is an optional setting that allows Claude to read CI results on PRs
+          additional_permissions: |
+            actions: read
