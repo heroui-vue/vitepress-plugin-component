@@ -7,6 +7,6 @@
   "devDependencies": {
     "vitepress": "latest",
     "vue": "^3.5.0",
-    "vitepress-plugin-vue-component-view": "workspace:*"
+    "vitepress-plugin-component": "workspace:*"
   }
 }

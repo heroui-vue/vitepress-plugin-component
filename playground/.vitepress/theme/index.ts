@@ -1,5 +1,5 @@
 import DefaultTheme from "vitepress/theme";
-import { enhanceAppWithComponentView } from "vitepress-plugin-vue-component-view/client";
+import { enhanceAppWithComponentView } from "vitepress-plugin-component/client";
 
 export default {
   extends: DefaultTheme,

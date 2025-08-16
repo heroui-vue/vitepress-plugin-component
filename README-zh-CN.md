@@ -1,4 +1,4 @@
-# vitepress-plugin-vue-component-view
+# vitepress-plugin-component
 
 [English](README.md)
 
@@ -15,7 +15,7 @@
 ## 安装
 
 ```bash
-npm install vitepress-plugin-vue-component-view --save-dev
+npm install vitepress-plugin-component --save-dev
 ```
 
 ## 配置
@@ -26,7 +26,7 @@ npm install vitepress-plugin-vue-component-view --save-dev
 
 ```ts
 import { defineConfig } from 'vitepress'
-import { componentViewMarkdownPlugin } from 'vitepress-plugin-vue-component-view'
+import { componentViewMarkdownPlugin } from 'vitepress-plugin-component'
 
 export default defineConfig({
   // ... 其他配置
@@ -46,7 +46,7 @@ vitepress从`.vitepress/theme/index.js` 或 `.vitepress/theme/index.ts`中解析
 ```ts
 // theme/index.ts
 import DefaultTheme from "vitepress/theme";
-import { enhanceAppWithComponentView } from 'vitepress-plugin-vue-component-view/client'
+import { enhanceAppWithComponentView } from 'vitepress-plugin-component/client'
 
 export default {
   extends: DefaultTheme, // 使用vitepress的默认主题

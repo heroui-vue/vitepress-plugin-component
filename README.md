@@ -15,7 +15,7 @@ A VitePress plugin to display Vue components in your documentation with an autom
 ## Installation
 
 ```bash
-npm install vitepress-plugin-vue-component-view --save-dev
+npm install vitepress-plugin-component --save-dev
 ```
 
 ## Configuration
@@ -26,7 +26,7 @@ Add the plugin to your VitePress configuration file (`.vitepress/config.js` or `
 
 ```ts
 import { defineConfig } from 'vitepress'
-import { componentViewMarkdownPlugin } from 'vitepress-plugin-vue-component-view'
+import { componentViewMarkdownPlugin } from 'vitepress-plugin-component'
 
 export default defineConfig({
   // ... other configurations
@@ -42,7 +42,7 @@ export default defineConfig({
 ### Configure Client
 
 ```ts
-import { enhanceAppWithComponentView } from 'vitepress-plugin-vue-component-view/client'
+import { enhanceAppWithComponentView } from 'vitepress-plugin-component/client'
 
 export default {
   enhanceApp({ app }) {
