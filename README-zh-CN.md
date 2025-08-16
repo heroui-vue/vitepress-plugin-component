@@ -41,15 +41,22 @@ export default defineConfig({
 
 ### 配置客户端
 
+vitepress从`.vitepress/theme/index.js` 或 `.vitepress/theme/index.ts`中解析主题，同样我们在这里配置客户端。
+
 ```ts
+// theme/index.ts
+import DefaultTheme from "vitepress/theme";
 import { enhanceAppWithComponentView } from 'vitepress-plugin-vue-component-view/client'
 
 export default {
+  extends: DefaultTheme, // 使用vitepress的默认主题
   enhanceApp({ app }) {
     enhanceAppWithComponentView(app)
   }
 }
 ```
+
+`enhanceAppWithComponentView`函数内部会在传递的根组件上自动注册预览组件。
 
 ## 示例
 
@@ -83,7 +90,9 @@ const count = ref(0)
 Vitepress支持[在markdown文件中导入Vue组件](https://vitepress.dev/zh/guide/using-vue#using-components), 我们以同样的方式导入Button组件：
 
 ```bash
-import Button from './src/Button.vue'
+<script setup>
+import Button from './Button.vue'
+</script>
 ```
 
 然后使用指定的语法：
@@ -92,6 +101,22 @@ import Button from './src/Button.vue'
 ::: component-view
 <Button />
 :::
+```
+
+以下是完整的示例代码，在markdown文件内：
+
+```markdown
+<script setup>
+import Button from './Button.vue'
+</script>
+
+# 这将渲染一个带有点击次数的按钮以及一个显示**预览**和**源代码**的tab条
+
+::: component-view
+<Button />
+:::
+
+##
 ```
 
 你可以前往此处的[查看效果](https://nextui-vue-docs.vercel.app/zh/components/button.html#%E4%BD%BF%E7%94%A8)。
