@@ -4,6 +4,8 @@ import { ref, watch } from "vue";
 const props = defineProps<{
     src: string;
     highlightedSrc?: string;
+    previewLabel?: string;
+    codeLabel?: string;
 }>();
 
 const highlightedSrc = ref("");
@@ -37,8 +39,8 @@ async function copyCode() {
         <header>
             <template
                 v-for="{ label, value } in [
-                    { label: '预览', value: 'preview' },
-                    { label: '源代码', value: 'code' },
+                    { label: props.previewLabel || 'Preview', value: 'preview' },
+                    { label: props.codeLabel || 'Source Code', value: 'code' },
                 ] as const"
                 :key="value"
             >

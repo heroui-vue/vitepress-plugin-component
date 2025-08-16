@@ -22,7 +22,7 @@ npm install vitepress-plugin-vue-component-view --save-dev
 
 ### 添加Markdown插件
 
-将插件添加到您的 VitePress 配置文件中（`.vitepress/config.js` 或 `.vitepress/config.ts`）：
+将插件添加到VitePress的配置文件中（`.vitepress/config.js` 或 `.vitepress/config.ts`）：
 
 ```ts
 import { defineConfig } from 'vitepress'
@@ -89,10 +89,15 @@ const count = ref(0)
 
 Vitepress支持[在markdown文件中导入Vue组件](https://vitepress.dev/zh/guide/using-vue#using-components), 我们以同样的方式导入Button组件：
 
+<<<<<<< HEAD
 ```bash
 <script setup>
 import Button from './Button.vue'
 </script>
+=======
+```js
+import Button from './Button.vue'
+>>>>>>> 3f9b215f7ab985ff13a48de7dfec7fc97e3b5b64
 ```
 
 然后使用指定的语法：
@@ -103,6 +108,7 @@ import Button from './Button.vue'
 :::
 ```
 
+<<<<<<< HEAD
 以下是完整的示例代码，在markdown文件内：
 
 ```markdown
@@ -120,6 +126,9 @@ import Button from './Button.vue'
 ```
 
 你可以前往此处的[查看效果](https://nextui-vue-docs.vercel.app/zh/components/button.html#%E4%BD%BF%E7%94%A8)。
+=======
+你可以前往此处[查看效果](https://nextui.hotdogc.org/zh/components/button.html#%E4%BD%BF%E7%94%A8)
+>>>>>>> 3f9b215f7ab985ff13a48de7dfec7fc97e3b5b64
 ## 许可证
 
 [MIT](LICENSE)

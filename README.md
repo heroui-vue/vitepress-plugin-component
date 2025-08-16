@@ -6,30 +6,25 @@ A VitePress plugin to display Vue components in your documentation with an autom
 
 ## Features
 
-- 🖼️ **Component Preview** - Directly view the rendered output of your component within the documentation.
-- 📝 **Source Code View** - View the complete source code of the component in a dedicated tab.
-- 🎨 **Syntax Highlighting** - Provides syntax highlighting for source code using highlight.js.
-- 📋 **Code Copying** - One-click copy for the component's source code.
-- 🌓 **Dark Mode Support** - Automatically adapts to VitePress's light and dark themes.
-- ⚡ **Lightweight** - No complex dependencies.
+- [x] **Component Preview** - Directly view the rendered output of your component within the documentation.
+- [x] **Syntax Highlighting** - Compatible with VitePress's syntax highlighting.
+- [ ] **Code Copying** - One-click copy for the component's source code.
+- [x] **Dark Mode Support** - Automatically adapts to VitePress's light and dark themes.
+- [x] **Lightweight** - No complex dependencies, only `2kb` / gzip:`1kb`.
 
 ## Installation
 
 ```bash
 npm install vitepress-plugin-vue-component-view --save-dev
-# Or
-yarn add vitepress-plugin-vue-component-view --dev
-# Or
-pnpm add vitepress-plugin-vue-component-view -D
-
 ```
 
 ## Configuration
 
-### 1. Add Markdown Plugin
+### Add Markdown Plugin
 
 Add the plugin to your VitePress configuration file (`.vitepress/config.js` or `.vitepress/config.ts`):
-```js
+
+```ts
 import { defineConfig } from 'vitepress'
 import { componentViewMarkdownPlugin } from 'vitepress-plugin-vue-component-view'
 
@@ -44,18 +39,13 @@ export default defineConfig({
 })
 ```
 
-This will generate an interface with two tabs: one showing the component's preview and the other showing its source code.
+### Configure Client
 
-### 2. Configure Client
-
-Import the plugin styles in your `.vitepress/theme/index.js`
-
-```js
-import 'vitepress-plugin-vue-component-view/styles'
+```ts
 import { enhanceAppWithComponentView } from 'vitepress-plugin-vue-component-view/client'
 
 export default {
-  enhanceApp{ app }) {
+  enhanceApp({ app }) {
     enhanceAppWithComponentView(app)
   }
 }
@@ -66,17 +56,17 @@ export default {
 This is an example of button SFC:
 
 ```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const count = ref(0)
+</script>
+
 <template>
   <button class="my-button" @click="count++">
     Clicked {{ count }} times
   </button>
 </template>
-
-<script setup>
-import { ref } from 'vue';
-
-const count = ref(0)
-</script>
 
 <style>
 .my-button {
@@ -88,15 +78,15 @@ const count = ref(0)
   cursor: pointer;
 }
 </style>
-````
-
-Then import it in the `.md` file:
-
-```markdown
-import Button from './src/Button.vue'
 ```
 
-Use the specified syntax:
+VitePress supports [importing Vue components in markdown files](https://vitepress.dev/guide/using-vue#using-components), we import the Button component in the same way:
+
+```js
+import Button from './Button.vue'
+```
+
+Then use the specified syntax:
 
 ```markdown
 ::: component-view
@@ -112,5 +102,4 @@ You can view the component's preview and source code in the tabs above.
 - Current version supports simple Vue components; complex components might require additional configuration. - Components must be valid Single File Components (SFCs).
 ## License
 
-MIT
-```
+[MIT](LICENSE)
