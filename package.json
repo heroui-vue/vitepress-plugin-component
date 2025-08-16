@@ -1,5 +1,5 @@
 {
-  "name": "vitepress-plugin-vue-component-view",
+  "name": "vitepress-plugin-component",
   "version": "0.3.1",
   "description": "VitePress plugin that renders Vue components with tabs showing preview and source code",
   "type": "module",
@@ -18,7 +18,8 @@
     "dev": "tsdown -w",
     "build": "tsdown --minify",
     "bump": "bumpp --sign",
-    "pub": "npm run build && npm publish --registry=https://registry.npmjs.org/"
+    "pub": "npm run build && npm publish --registry=https://registry.npmjs.org/",
+    "dev:docs": "pnpm -C playground dev"
   },
   "keywords": [
     "vitepress",
@@ -46,7 +47,7 @@
     "tsdown": "latest",
     "typescript": "^5.8.3",
     "unplugin-vue": "^6.2.0",
-    "vitepress": "^1.0.0-beta.1",
+    "vitepress": "latest",
     "vue": "^3.5.0"
   }
 }
