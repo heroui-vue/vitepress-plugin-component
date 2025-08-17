@@ -11,6 +11,7 @@
 - [ ] **代码复制** 一键复制组件的源代码。
 - [x] **深色模式支持** 自动适应 VitePress 的浅色和深色主题。
 - [x] **轻量级** 无复杂的依赖项, 仅 `2kb` / gzip:`1kb`。
+- [x] **国际化支持** 默认支持中文和英语，可通过配置来支持其他语言。
 
 ## 安装
 
@@ -57,6 +58,29 @@ export default {
 ```
 
 `enhanceAppWithComponentView`函数内部会在传递的根组件上自动注册预览组件。
+
+### 配置国际化
+
+插件从vitepress中的`locales.lang`选项获取语言配置，并默认支持`zh`和`en`两种语言。你也可以手动配置其他语言甚至覆盖默认语言。
+
+在客户端配置中配置国际化
+
+```ts
+export default {
+  // 其他配置
+  enhanceApp({ app }) {
+    enhanceAppWithComponentView(app, {
+      // 通过localeMappings选项配置对应的语言
+      localeMappings: {
+        fr: {
+          previewLabel: "foo",
+          codeLabel: "bar",
+        },
+      },
+    });
+  },
+};
+```
 
 ## 示例
 
