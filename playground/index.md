@@ -2,7 +2,9 @@
 import Button from './Button.vue'
 </script>
 
-这将渲染一个带有点击次数的按钮以及一个显示**预览**和**源代码**的tab条
+# English Content
+
+This will render a button with a click counter and a tab bar showing **Preview** and **Source Code**
 
 ::: component-view
 <Button />
