@@ -1,5 +1,20 @@
-<script setup lang="ts">
-import { ref, watch } from "vue";
+<script setup lang="ts" generic="T">
+import { ref, watch, computed } from "vue";
+import { useData } from "vitepress";
+import { useLocaleMappings } from "./useLocaleMappings";
+
+import type { LocaleMappings } from "./useLocaleMappings";
+
+const localMappings: LocaleMappings = {
+    en: {
+        previewLabel: "Preview",
+        codeLabel: "Source Code",
+    },
+    zh: {
+        previewLabel: "预览",
+        codeLabel: "源代码",
+    },
+};
 
 const props = defineProps<{
     src: string;
@@ -7,6 +22,15 @@ const props = defineProps<{
     previewLabel?: string;
     codeLabel?: string;
 }>();
+
+const { lang } = useData();
+const { get } = useLocaleMappings();
+
+const label = computed(() => {
+    const mappings = { ...localMappings, ...(get() ?? {}) };
+    // Default to English mappings if no locale-specific mappings are found
+    return mappings[lang.value] ?? localMappings.en;
+});
 
 const highlightedSrc = ref("");
 const activedTab = ref<"preview" | "code">("preview");
@@ -39,8 +63,11 @@ async function copyCode() {
         <header>
             <template
                 v-for="{ label, value } in [
-                    { label: props.previewLabel || 'Preview', value: 'preview' },
-                    { label: props.codeLabel || 'Source Code', value: 'code' },
+                    {
+                        label: label.previewLabel,
+                        value: 'preview',
+                    },
+                    { label: label.codeLabel, value: 'code' },
                 ] as const"
                 :key="value"
             >
