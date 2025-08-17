@@ -11,7 +11,6 @@
 - [ ] **代码复制** 一键复制组件的源代码。
 - [x] **深色模式支持** 自动适应 VitePress 的浅色和深色主题。
 - [x] **轻量级** 无复杂的依赖项, 仅 `2kb` / gzip:`1kb`。
-- [x] **国际化支持** 默认支持中文和英语，可通过配置来支持其他语言。
 
 ## 安装
 
@@ -42,44 +41,14 @@ export default defineConfig({
 
 ### 配置客户端
 
-vitepress从`.vitepress/theme/index.js` 或 `.vitepress/theme/index.ts`中解析主题，同样我们在这里配置客户端。
-
 ```ts
-// theme/index.ts
-import DefaultTheme from "vitepress/theme";
 import { enhanceAppWithComponentView } from 'vitepress-plugin-component/client'
 
 export default {
-  extends: DefaultTheme, // 使用vitepress的默认主题
   enhanceApp({ app }) {
     enhanceAppWithComponentView(app)
   }
 }
-```
-
-`enhanceAppWithComponentView`函数内部会在传递的根组件上自动注册预览组件。
-
-### 配置国际化
-
-插件从vitepress中的`locales.lang`选项获取语言配置，并默认支持`zh`和`en`两种语言。你也可以手动配置其他语言甚至覆盖默认语言。
-
-在客户端配置中配置国际化
-
-```ts
-export default {
-  // 其他配置
-  enhanceApp({ app }) {
-    enhanceAppWithComponentView(app, {
-      // 通过localeMappings选项配置对应的语言
-      localeMappings: {
-        fr: {
-          previewLabel: "foo",
-          codeLabel: "bar",
-        },
-      },
-    });
-  },
-};
 ```
 
 ## 示例
@@ -113,10 +82,8 @@ const count = ref(0)
 
 Vitepress支持[在markdown文件中导入Vue组件](https://vitepress.dev/zh/guide/using-vue#using-components), 我们以同样的方式导入Button组件：
 
-```bash
-<script setup>
+```js
 import Button from './Button.vue'
-</script>
 ```
 
 然后使用指定的语法：
@@ -144,6 +111,13 @@ import Button from './Button.vue'
 ```
 
 你可以前往此处的[查看效果](https://nextui-vue-docs.vercel.app/zh/components/button.html#%E4%BD%BF%E7%94%A8)。
+
+## 注意事项
+
+- 组件路径应相对于项目根目录。
+- 当前版本支持简单的 Vue 组件；复杂组件可能需要额外配置。
+- 组件必须是有效的单文件组件 (SFC)。
+
 ## 许可证
 
 [MIT](LICENSE)
