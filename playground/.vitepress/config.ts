@@ -5,6 +5,15 @@ import { componentViewMarkdownPlugin } from "vitepress-plugin-component";
 export default defineConfig({
   title: "vitepress-plugin-component",
   description: "vitepress-plugin-component plugin",
+  themeConfig: {
+    socialLinks: [
+      { icon: "github", link: "https://github.com/heroui-vue/heroui-vue" },
+      {
+        icon: "npm",
+        link: "https://www.npmjs.com/package/vitepress-plugin-component",
+      },
+    ],
+  },
   locales: {
     root: {
       label: "English",

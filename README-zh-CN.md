@@ -1,4 +1,4 @@
-# vitepress-plugin-component
+# Vitepress Plugin Component
 
 [English](README.md)
 
