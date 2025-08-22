@@ -2,7 +2,8 @@
   "name": "playground",
   "type": "module",
   "scripts": {
-    "dev": "vitepress"
+    "dev": "vitepress",
+    "build": "vitepress build"
   },
   "devDependencies": {
     "vitepress": "latest",
