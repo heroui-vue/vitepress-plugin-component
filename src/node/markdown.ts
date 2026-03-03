@@ -12,7 +12,7 @@ export const componentViewMarkdownPlugin = (md: MarkdownIt) => {
     },
     render: (tokens: Token[], idx: number) => {
       const token = tokens[idx];
-      const content = tokens[idx + 1].content.trim();
+      const content = token.meta?.componentViewSource?.trim() ?? "";
       const highlightContent =
         md.options.highlight?.(content, "html", "") ?? "";
       if (token.nesting === 1) {
@@ -21,5 +21,25 @@ export const componentViewMarkdownPlugin = (md: MarkdownIt) => {
         return `</ComponentView>`;
       }
     },
+  });
+
+  md.core.ruler.after("block", "component-view-source", (state) => {
+    const sourceLines = state.src.split(/\r?\n/);
+
+    state.tokens.forEach((token) => {
+      if (
+        token.type !== `container_${CONTAINER_NAME}_open` ||
+        token.nesting !== 1 ||
+        !token.map
+      ) {
+        return;
+      }
+
+      const [startLine, endLine] = token.map;
+      const source = sourceLines.slice(startLine + 1, endLine).join("\n");
+
+      token.meta ??= {};
+      token.meta.componentViewSource = source;
+    });
   });
 };

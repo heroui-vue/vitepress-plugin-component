@@ -30,7 +30,7 @@ export function useLocaleMappings(app?: App) {
       }
     },
     get: () => {
-      return inject<LocaleMappings>(localeMappingSymbol);
+      return inject<LocaleMappings | undefined>(localeMappingSymbol, undefined);
     },
   };
 }

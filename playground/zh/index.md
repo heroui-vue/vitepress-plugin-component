@@ -9,5 +9,3 @@ import Button from '../Button.vue'
 ::: component-view
 <Button />
 :::
-
-##

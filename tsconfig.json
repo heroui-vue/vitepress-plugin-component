@@ -8,6 +8,6 @@
     "resolveJsonModule": true,
     "composite": true
   },
-  "include": ["src/**/*.{js,ts,vue}"],
+  "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.vue"],
   "exclude": ["node_modules", "dist"]
 }

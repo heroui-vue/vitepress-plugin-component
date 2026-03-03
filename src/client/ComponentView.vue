@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="T">
-import { ref, watch, computed } from "vue";
+import { computed, ref, useId, watch } from "vue";
 import { useData } from "vitepress";
 import { useLocaleMappings } from "./useLocaleMappings";
 
@@ -32,16 +32,29 @@ const label = computed(() => {
     return mappings[lang.value] ?? localMappings.en;
 });
 
+const decodedSrc = ref("");
 const highlightedSrc = ref("");
 const activedTab = ref<"preview" | "code">("preview");
 const copied = ref(false);
+const tabGroupId = useId();
 
 watch(
     [() => props.src, () => props.highlightedSrc],
     async ([src, highlight = ""]) => {
-        highlightedSrc.value = atob(highlight);
         try {
-            src = atob(src);
+            decodedSrc.value = atob(src);
+        } catch (e) {
+            decodedSrc.value = src;
+        }
+
+        try {
+            highlightedSrc.value = atob(highlight);
+        } catch (e) {
+            highlightedSrc.value = highlight;
+        }
+
+        try {
+            atob(src);
         } catch (e) {}
     },
     {
@@ -50,7 +63,7 @@ watch(
 );
 
 async function copyCode() {
-    await navigator.clipboard.writeText(props.src);
+    await navigator.clipboard.writeText(decodedSrc.value);
     copied.value = true;
     setTimeout(() => {
         copied.value = false;
@@ -72,13 +85,13 @@ async function copyCode() {
                 :key="value"
             >
                 <input
-                    :id="`tab-${value}`"
+                    :id="`tab-${tabGroupId}-${value}`"
                     type="radio"
-                    name="vp-component-tabs"
+                    :name="`vp-component-tabs-${tabGroupId}`"
                     style="position: fixed; opacity: 0; pointer-events: none"
                     :data-checked="activedTab === value"
                 />
-                <label :for="`tab-${value}`" @click="activedTab = value">{{
+                <label :for="`tab-${tabGroupId}-${value}`" @click="activedTab = value">{{
                     label
                 }}</label>
             </template>

@@ -6,14 +6,17 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "exports": {
-    ".": "./dist/index.js",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
     "./client": "./src/client/index.ts"
   },
   "files": [
     "dist",
     "src/client"
   ],
-  "types": "index.d.ts",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "tsdown -w",
     "build": "tsdown --minify",
