@@ -143,7 +143,7 @@ import Button from './Button.vue'
 ##
 ```
 
-你可以前往此处的[查看效果](https://nextui-vue-docs.vercel.app/zh/components/button.html#%E4%BD%BF%E7%94%A8)。
+你可以前往此处的[查看效果](https://heroui-vue-docs.vercel.app/zh/components/button.html#%E4%BD%BF%E7%94%A8)。
 ## 许可证
 
 [MIT](LICENSE)

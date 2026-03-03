@@ -145,7 +145,7 @@ import Button from './Button.vue'
 
 You can view the component's preview and source code in the tabs above.
 
-You can check out the [live demo here](https://nextui-vue-docs.vercel.app/zh/components/button.html#%E4%BD%BF%E7%94%A8).
+You can check out the [live demo here](https://heroui-vue-docs.vercel.app/zh/components/button.html#%E4%BD%BF%E7%94%A8).
 
 ## Notes
 
